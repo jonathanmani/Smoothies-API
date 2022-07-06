@@ -13,8 +13,11 @@ All methods begin with the link https://smoothie-api-node.herokuapp.com. Additio
 
 ### Get Methods
 All Smoothie Data: /api
+
 Berry Smoothie: /api/berry
+
 Banana Smoothie: /api/banana
+
 Green Smoothie: /api/green
 
 ## Optimizations

@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 8000;
+require('dotenv').config()
+
+const MongoClient = require('mongodb').MongoClient
+let db,
+    dbConnectionString = process.env.DB_STRING,
+    dbName = 'Smoothies API'
 
 app.use(cors());
 

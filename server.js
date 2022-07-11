@@ -9,6 +9,12 @@ let db,
     dbConnectionString = process.env.DB_STRING,
     dbName = 'Smoothies API'
 
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+    .then(client => {
+        console.log(`Connected to ${dbName} Database`)
+        db = client.db(dbName)
+    })
+
 app.use(cors());
 
 const smoothie = {

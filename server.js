@@ -62,9 +62,6 @@ const smoothie = {
     }
 }
 
-app.get('/', (req,res)=>{
-    res.sendFile(__dirname + '/index.html')
-})
 
 app.get('/', (req,res)=>{
     db.collection('smoothies').find().toArray()

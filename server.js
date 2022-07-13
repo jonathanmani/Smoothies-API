@@ -1,19 +1,25 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const { response } = require('express');
 const PORT = 8000;
 require('dotenv').config()
 
 const MongoClient = require('mongodb').MongoClient
 let db,
-    dbConnectionString = process.env.DB_STRING,
-    dbName = 'Smoothies API'
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = 'Smoothies-API'
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     .then(client => {
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
     })
+
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 app.use(cors());
 
@@ -58,6 +64,23 @@ const smoothie = {
 
 app.get('/', (req,res)=>{
     res.sendFile(__dirname + '/index.html')
+})
+
+app.get('/', (req,res)=>{
+    db.collection('smoothies').find().toArray()
+    .then(data =>{
+        res.render('index.ejs', {info : data})
+    })
+    .catch(err => console.error(err))
+})
+
+app.post('/addSmoothie', (req,res)=>{
+    db.collection('smoothies').insertOne(req.body)
+    .then(data => {
+        console.log('Smoothie Added')
+        response.redirect('/')
+    })
+    .catch(err => console.error(err))
 })
 
 app.get('/api', (req,res)=>{

@@ -80,10 +80,6 @@ app.post('/addSmoothie', (req,res)=>{
     .catch(err => console.error(err))
 })
 
-app.get('/api', (req,res)=>{
-    res.json(smoothie)
-})
-
 app.get('/api/:name', (req,res)=>{
     const smoothieName = req.params.name.toLowerCase();
 

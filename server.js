@@ -72,13 +72,23 @@ app.get('/', (req,res)=>{
 })
 
 app.post('/addSmoothie', (req,res)=>{
-    db.collection('smoothies').insertOne(req.body)
+    db.collection('smoothies').insertOne({
+        name: req.body.name,
+        liquid: req.body.liquid,
+        protein: req.body.protein,
+        fruit: req.body.fruit,
+        spread: req.body.spread,
+        carbs: req.body.carbs,
+        fats: req.body.fats,
+        extra: req.body.extra
+    })
     .then(data => {
         console.log('Smoothie Added')
-        response.redirect('/')
+        res.redirect('/')
     })
     .catch(err => console.error(err))
 })
+
 
 app.get('/api/:name', (req,res)=>{
     const smoothieName = req.params.name.toLowerCase();
@@ -88,6 +98,18 @@ app.get('/api/:name', (req,res)=>{
     } else {
         res.json(smoothie['unknown'])
     }
+
+})
+
+app.delete('/deleteSmoothie', (req, res) => {
+    db.collection('smoothies').deleteOne({
+        name: request.body.nameS
+    })
+    .then(result => {
+        console.log('Smoothie Deleted')
+        response.json('Smoothie Deleted')
+    })
+    .catch(error => console.error(error))
 
 })
 

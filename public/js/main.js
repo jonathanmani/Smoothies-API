@@ -1,3 +1,9 @@
+const deleteText = document.querySelectorAll('.fa-trash')
+
+Array.from(deleteText).forEach((element) =>{
+    element.addEventListener('click', deleteSmoothie)
+})
+
 async function deleteSmoothie(){
     const sName = this.parentNode.childNodes[1].innerText
     try{

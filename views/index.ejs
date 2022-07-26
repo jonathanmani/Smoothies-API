@@ -7,6 +7,23 @@
     <title>Smoothies API</title>
 </head>
 <body>
+    <h1>Current Smoothies</h1>
+    <ul class="smoothies">
+    <% for(let i=0; i < info.length; i++) {%>
+        <li class="smoothie">
+            <span><%= info[i].name %></span>
+            <span><%= info[i].liquid %></span>
+            <span><%= info[i].protein %></span>
+            <span><%= info[i].fruit %></span>
+            <span><%= info[i].spread %></span>
+            <span><%= info[i].carbs %></span>
+            <span><%= info[i].fats %></span>
+            <span><%= info[i].extra %></span>
+            <span class='fa fa-trash'></span>
+        </li>
+    <% } %>
+    </ul>
+
     <h1>Add Smoothie</h1>
     <form action="/addSmoothie" method="POST">
         <input type="text" placeholder="Name of Smoothie" name="name">
